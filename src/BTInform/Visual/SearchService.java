@@ -57,6 +57,7 @@ public class SearchService implements CommandListener {
 		// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|23-preAction
 		// write pre-action user code here
+		midlet.visualFlow(true);
 //GEN-LINE:|4-commandAction|6|23-postAction
 		// write post-action user code here
 	    }//GEN-BEGIN:|4-commandAction|7|4-postCommandAction

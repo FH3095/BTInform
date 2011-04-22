@@ -43,8 +43,7 @@ public class BTInform extends MIDlet {
 
     public void startMIDlet()
     {
-	searchPC=new SearchPC(this);
-	switchDisplayable(searchPC.getSearchPC());
+	visualFlow(true);
     }
 
     public void resumeMIDlet()
@@ -88,5 +87,31 @@ public class BTInform extends MIDlet {
     
     public Display getDisplay() {
         return Display.getDisplay(this);
+    }
+    
+    public void visualFlow(boolean forward)
+    {
+	if(searchPC!=null)
+	{
+	    searchService=new SearchService(this);
+	    switchDisplayable(searchService.getSearchService());
+	    searchPC=null;
+	    return;
+	}
+	if(searchService!=null)
+	{
+	    awaitMessage=new AwaitMessage(this);
+	    switchDisplayable(awaitMessage.getAwaitMessage());
+	    searchService=null;
+	    return;
+	}
+	if(awaitMessage!=null)
+	{
+	    alertMessage=new AlertMessage(this);
+	    switchDisplayable(alertMessage.getAlertMessage(), awaitMessage.getAwaitMessage());
+	    return;
+	}
+	searchPC=new SearchPC(this);
+	switchDisplayable(searchPC.getSearchPC());
     }
 }

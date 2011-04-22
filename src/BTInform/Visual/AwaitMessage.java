@@ -12,8 +12,8 @@ public class AwaitMessage implements CommandListener {
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Form awaitMessage;
-    private Command okCommand;
     private Command exitCommand;
+    private Command okCommand;
     //</editor-fold>//GEN-END:|fields|0|
     /**
      * The AwaitMessage constructor.
@@ -43,15 +43,15 @@ public class AwaitMessage implements CommandListener {
      * @return the initialized component instance
      */
     public Form getAwaitMessage() {
-        if (awaitMessage == null) {//GEN-END:|11-getter|0|11-preInit
+	if (awaitMessage == null) {//GEN-END:|11-getter|0|11-preInit
             // write pre-init user code here
-            awaitMessage = new Form("form");//GEN-BEGIN:|11-getter|1|11-postInit
-            awaitMessage.addCommand(getOkCommand());
-            awaitMessage.addCommand(getExitCommand());
-            awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
+	    awaitMessage = new Form("form");//GEN-BEGIN:|11-getter|1|11-postInit
+	    awaitMessage.addCommand(getExitCommand());
+	    awaitMessage.addCommand(getOkCommand());
+	    awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|11-getter|2|
-        return awaitMessage;
+	}//GEN-BEGIN:|11-getter|2|
+	return awaitMessage;
     }
     //</editor-fold>//GEN-END:|11-getter|2|
 
@@ -63,36 +63,25 @@ public class AwaitMessage implements CommandListener {
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
         // write pre-action user code here
-        if (displayable == awaitMessage) {//GEN-BEGIN:|4-commandAction|1|15-preAction
-            if (command == exitCommand) {//GEN-END:|4-commandAction|1|15-preAction
+	if (displayable == awaitMessage) {//GEN-BEGIN:|4-commandAction|1|15-preAction
+	    if (command == exitCommand) {//GEN-END:|4-commandAction|1|15-preAction
                 // write pre-action user code here
 		midlet.exitMIDlet();
 //GEN-LINE:|4-commandAction|2|15-postAction
                 // write post-action user code here
-            } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|13-preAction
-                // write pre-action user code here
-//GEN-LINE:|4-commandAction|4|13-postAction
-                // write post-action user code here
-            }//GEN-BEGIN:|4-commandAction|5|4-postCommandAction
-        }//GEN-END:|4-commandAction|5|4-postCommandAction
+	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|19-preAction
+		// write pre-action user code here
+		midlet.visualFlow(true);
+//GEN-LINE:|4-commandAction|4|19-postAction
+		// write post-action user code here
+	    }//GEN-BEGIN:|4-commandAction|5|4-postCommandAction
+	}//GEN-END:|4-commandAction|5|4-postCommandAction
         // write post-action user code here
     }//GEN-BEGIN:|4-commandAction|6|
     //</editor-fold>//GEN-END:|4-commandAction|6|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|12-getter|0|12-preInit
-    /**
-     * Returns an initiliazed instance of okCommand component.
-     * @return the initialized component instance
-     */
-    public Command getOkCommand() {
-        if (okCommand == null) {//GEN-END:|12-getter|0|12-preInit
-            // write pre-init user code here
-            okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|12-getter|1|12-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|12-getter|2|
-        return okCommand;
-    }
-    //</editor-fold>//GEN-END:|12-getter|2|
+
+
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|14-getter|0|14-preInit
     /**
@@ -100,12 +89,49 @@ public class AwaitMessage implements CommandListener {
      * @return the initialized component instance
      */
     public Command getExitCommand() {
-        if (exitCommand == null) {//GEN-END:|14-getter|0|14-preInit
+	if (exitCommand == null) {//GEN-END:|14-getter|0|14-preInit
             // write pre-init user code here
-            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|14-getter|1|14-postInit
+	    exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|14-getter|1|14-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|14-getter|2|
-        return exitCommand;
+	}//GEN-BEGIN:|14-getter|2|
+	return exitCommand;
     }
     //</editor-fold>//GEN-END:|14-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: switchDisplayable ">//GEN-BEGIN:|2-switchDisplayable|0|2-preSwitch
+    /**
+     * Switches a current displayable in a display. The <code>display</code> instance is taken from <code>getDisplay</code> method. This method is used by all actions in the design for switching displayable.
+     * @param alert the Alert which is temporarily set to the display; if <code>null</code>, then <code>nextDisplayable</code> is set immediately
+     * @param nextDisplayable the Displayable to be set
+     */
+    public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
+	// write pre-switch user code here
+	Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
+	if (alert == null) {
+	    display.setCurrent(nextDisplayable);
+	} else {
+	    display.setCurrent(alert, nextDisplayable);
+	}//GEN-END:|2-switchDisplayable|1|2-postSwitch
+	// write post-switch user code here
+    }//GEN-BEGIN:|2-switchDisplayable|2|
+    //</editor-fold>//GEN-END:|2-switchDisplayable|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
+    /**
+     * Returns an initiliazed instance of okCommand component.
+     * @return the initialized component instance
+     */
+    public Command getOkCommand() {
+	if (okCommand == null) {//GEN-END:|18-getter|0|18-preInit
+	    // write pre-init user code here
+	    okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|18-getter|1|18-postInit
+	    // write post-init user code here
+	}//GEN-BEGIN:|18-getter|2|
+	return okCommand;
+    }
+    //</editor-fold>//GEN-END:|18-getter|2|
+
+    private Display getDisplay() {
+	return midlet.getDisplay();
+    }
 }
