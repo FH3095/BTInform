@@ -1,18 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BTInform.Visual;
 
-import javax.microedition.midlet.*;
+import BTInform.BTInform;
 import javax.microedition.lcdui.*;
 
 /**
- * @author A_FH
+ * @author FH
  */
 public class AlertMessage implements CommandListener {
     
-    private MIDlet midlet;
+    private BTInform midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Alert alertMessage;
@@ -23,7 +19,7 @@ public class AlertMessage implements CommandListener {
      * The AlertMessage constructor.
      * @param midlet the midlet used for getting
      */
-    public AlertMessage(MIDlet midlet) {
+    public AlertMessage(BTInform midlet) {
         this.midlet = midlet;
     }
 

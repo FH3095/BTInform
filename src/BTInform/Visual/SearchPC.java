@@ -1,18 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package BTInform.Visual;
 
-import javax.microedition.midlet.*;
+import BTInform.BTInform;
 import javax.microedition.lcdui.*;
 
 /**
- * @author A_FH
+ * @author FH
  */
 public class SearchPC implements CommandListener {
     
-    private MIDlet midlet;
+    private BTInform midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Form searchPC;
@@ -23,7 +19,7 @@ public class SearchPC implements CommandListener {
      * The SearchPC constructor.
      * @param midlet the midlet used for getting
      */
-    public SearchPC(MIDlet midlet) {
+    public SearchPC(BTInform midlet) {
         this.midlet = midlet;
     }
 
@@ -88,6 +84,7 @@ public class SearchPC implements CommandListener {
         if (displayable == searchPC) {//GEN-BEGIN:|4-commandAction|1|13-preAction
             if (command == exitCommand) {//GEN-END:|4-commandAction|1|13-preAction
                 // write pre-action user code here
+		midlet.exitMIDlet();
 //GEN-LINE:|4-commandAction|2|13-postAction
                 // write post-action user code here
             } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|15-preAction

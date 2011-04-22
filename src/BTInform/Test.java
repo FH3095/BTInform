@@ -10,11 +10,13 @@ import javax.microedition.lcdui.*;
 /**
  * @author A_FH
  */
-public class Test extends MIDlet {
+public class Test extends MIDlet implements CommandListener {
     
     private boolean midletPaused = false;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
+    private Form testForm;
+    private Command exitCommand;
     //</editor-fold>//GEN-END:|fields|0|
     /**
      * The Test constructor.
@@ -26,7 +28,7 @@ public class Test extends MIDlet {
     //</editor-fold>//GEN-END:|methods|0|
     //<editor-fold defaultstate="collapsed" desc=" Generated Method: initialize ">//GEN-BEGIN:|0-initialize|0|0-preInitialize
     /**
-     * Initilizes the application.
+     * Initializes the application.
      * It is called only once when the MIDlet is started. The method is called before the <code>startMIDlet</code> method.
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
@@ -42,7 +44,7 @@ public class Test extends MIDlet {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
-//GEN-LINE:|3-startMIDlet|1|3-postAction
+        switchDisplayable(null, getTestForm());//GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
     //</editor-fold>//GEN-END:|3-startMIDlet|2|
@@ -75,6 +77,57 @@ public class Test extends MIDlet {
         // write post-switch user code here
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: testForm ">//GEN-BEGIN:|14-getter|0|14-preInit
+    /**
+     * Returns an initiliazed instance of testForm component.
+     * @return the initialized component instance
+     */
+    public Form getTestForm() {
+        if (testForm == null) {//GEN-END:|14-getter|0|14-preInit
+            // write pre-init user code here
+            testForm = new Form("form");//GEN-BEGIN:|14-getter|1|14-postInit
+            testForm.addCommand(getExitCommand());
+            testForm.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|14-getter|2|
+        return testForm;
+    }
+    //</editor-fold>//GEN-END:|14-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: commandAction for Displayables ">//GEN-BEGIN:|7-commandAction|0|7-preCommandAction
+    /**
+     * Called by a system to indicated that a command has been invoked on a particular displayable.
+     * @param command the Command that was invoked
+     * @param displayable the Displayable where the command was invoked
+     */
+    public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
+        // write pre-action user code here
+        if (displayable == testForm) {//GEN-BEGIN:|7-commandAction|1|17-preAction
+            if (command == exitCommand) {//GEN-END:|7-commandAction|1|17-preAction
+                // write pre-action user code here
+                exitMIDlet();//GEN-LINE:|7-commandAction|2|17-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|7-commandAction|3|7-postCommandAction
+        }//GEN-END:|7-commandAction|3|7-postCommandAction
+        // write post-action user code here
+    }//GEN-BEGIN:|7-commandAction|4|
+    //</editor-fold>//GEN-END:|7-commandAction|4|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|16-getter|0|16-preInit
+    /**
+     * Returns an initiliazed instance of exitCommand component.
+     * @return the initialized component instance
+     */
+    public Command getExitCommand() {
+        if (exitCommand == null) {//GEN-END:|16-getter|0|16-preInit
+            // write pre-init user code here
+            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|16-getter|1|16-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|16-getter|2|
+        return exitCommand;
+    }
+    //</editor-fold>//GEN-END:|16-getter|2|
 
     /**
      * Returns a display instance.
