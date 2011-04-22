@@ -11,7 +11,7 @@ public class SearchPC implements CommandListener {
     private BTInform midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
-    private Form searchPC;
+    private List searchPC;
     private Command exitCommand;
     private Command okCommand;
     //</editor-fold>//GEN-END:|fields|0|
@@ -37,42 +37,6 @@ public class SearchPC implements CommandListener {
     }//GEN-BEGIN:|0-initialize|2|
     //</editor-fold>//GEN-END:|0-initialize|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: switchDisplayable ">//GEN-BEGIN:|2-switchDisplayable|0|2-preSwitch
-    /**
-     * Switches a current displayable in a display. The <code>display</code> instance is taken from <code>getDisplay</code> method. This method is used by all actions in the design for switching displayable.
-     * @param alert the Alert which is temporarily set to the display; if <code>null</code>, then <code>nextDisplayable</code> is set immediately
-     * @param nextDisplayable the Displayable to be set
-     */
-    public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
-        // write pre-switch user code here
-        Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
-        if (alert == null) {
-            display.setCurrent(nextDisplayable);
-        } else {
-            display.setCurrent(alert, nextDisplayable);
-        }//GEN-END:|2-switchDisplayable|1|2-postSwitch
-        // write post-switch user code here
-    }//GEN-BEGIN:|2-switchDisplayable|2|
-    //</editor-fold>//GEN-END:|2-switchDisplayable|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: searchPC ">//GEN-BEGIN:|11-getter|0|11-preInit
-    /**
-     * Returns an initiliazed instance of searchPC component.
-     * @return the initialized component instance
-     */
-    public Form getSearchPC() {
-        if (searchPC == null) {//GEN-END:|11-getter|0|11-preInit
-            // write pre-init user code here
-            searchPC = new Form("Search PC");//GEN-BEGIN:|11-getter|1|11-postInit
-            searchPC.addCommand(getExitCommand());
-            searchPC.addCommand(getOkCommand());
-            searchPC.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|11-getter|2|
-        return searchPC;
-    }
-    //</editor-fold>//GEN-END:|11-getter|2|
-
     //<editor-fold defaultstate="collapsed" desc=" Generated Method: commandAction for Displayables ">//GEN-BEGIN:|4-commandAction|0|4-preCommandAction
     /**
      * Called by a system to indicated that a command has been invoked on a particular displayable.
@@ -81,67 +45,84 @@ public class SearchPC implements CommandListener {
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
         // write pre-action user code here
-        if (displayable == searchPC) {//GEN-BEGIN:|4-commandAction|1|13-preAction
-            if (command == exitCommand) {//GEN-END:|4-commandAction|1|13-preAction
-                // write pre-action user code here
+	if (displayable == searchPC) {//GEN-BEGIN:|4-commandAction|1|21-preAction
+	    if (command == List.SELECT_COMMAND) {//GEN-END:|4-commandAction|1|21-preAction
+		// write pre-action user code here
+		searchPCAction();//GEN-LINE:|4-commandAction|2|21-postAction
+		// write post-action user code here
+	    } else if (command == exitCommand) {//GEN-LINE:|4-commandAction|3|27-preAction
+		// write pre-action user code here
 		midlet.exitMIDlet();
-//GEN-LINE:|4-commandAction|2|13-postAction
-                // write post-action user code here
-            } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|15-preAction
-                // write pre-action user code here
-//GEN-LINE:|4-commandAction|4|15-postAction
-                // write post-action user code here
-            }//GEN-BEGIN:|4-commandAction|5|4-postCommandAction
-        }//GEN-END:|4-commandAction|5|4-postCommandAction
+//GEN-LINE:|4-commandAction|4|27-postAction
+		// write post-action user code here
+	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|29-preAction
+		// write pre-action user code here
+//GEN-LINE:|4-commandAction|6|29-postAction
+		// write post-action user code here
+	    }//GEN-BEGIN:|4-commandAction|7|4-postCommandAction
+	}//GEN-END:|4-commandAction|7|4-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|4-commandAction|6|
-    //</editor-fold>//GEN-END:|4-commandAction|6|
+    }//GEN-BEGIN:|4-commandAction|8|
+    //</editor-fold>//GEN-END:|4-commandAction|8|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|12-getter|0|12-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: searchPC ">//GEN-BEGIN:|20-getter|0|20-preInit
+    /**
+     * Returns an initiliazed instance of searchPC component.
+     * @return the initialized component instance
+     */
+    public List getSearchPC() {
+	if (searchPC == null) {//GEN-END:|20-getter|0|20-preInit
+	    // write pre-init user code here
+	    searchPC = new List("Search PC", Choice.IMPLICIT);//GEN-BEGIN:|20-getter|1|20-postInit
+	    searchPC.addCommand(getExitCommand());
+	    searchPC.addCommand(getOkCommand());
+	    searchPC.setCommandListener(this);
+	    searchPC.setFitPolicy(Choice.TEXT_WRAP_DEFAULT);
+	    searchPC.setSelectCommand(null);//GEN-END:|20-getter|1|20-postInit
+	    // write post-init user code here
+	}//GEN-BEGIN:|20-getter|2|
+	return searchPC;
+    }
+    //</editor-fold>//GEN-END:|20-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: searchPCAction ">//GEN-BEGIN:|20-action|0|20-preAction
+    /**
+     * Performs an action assigned to the selected list element in the searchPC component.
+     */
+    public void searchPCAction() {//GEN-END:|20-action|0|20-preAction
+	// enter pre-action user code here
+	String __selectedString = getSearchPC().getString(getSearchPC().getSelectedIndex());//GEN-LINE:|20-action|1|20-postAction
+	// enter post-action user code here
+    }//GEN-BEGIN:|20-action|2|
+    //</editor-fold>//GEN-END:|20-action|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|26-getter|0|26-preInit
     /**
      * Returns an initiliazed instance of exitCommand component.
      * @return the initialized component instance
      */
     public Command getExitCommand() {
-        if (exitCommand == null) {//GEN-END:|12-getter|0|12-preInit
-            // write pre-init user code here
-            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|12-getter|1|12-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|12-getter|2|
-        return exitCommand;
+	if (exitCommand == null) {//GEN-END:|26-getter|0|26-preInit
+	    // write pre-init user code here
+	    exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|26-getter|1|26-postInit
+	    // write post-init user code here
+	}//GEN-BEGIN:|26-getter|2|
+	return exitCommand;
     }
-    //</editor-fold>//GEN-END:|12-getter|2|
+    //</editor-fold>//GEN-END:|26-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|14-getter|0|14-preInit
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: okCommand ">//GEN-BEGIN:|28-getter|0|28-preInit
     /**
      * Returns an initiliazed instance of okCommand component.
      * @return the initialized component instance
      */
     public Command getOkCommand() {
-        if (okCommand == null) {//GEN-END:|14-getter|0|14-preInit
-            // write pre-init user code here
-            okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|14-getter|1|14-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|14-getter|2|
-        return okCommand;
+	if (okCommand == null) {//GEN-END:|28-getter|0|28-preInit
+	    // write pre-init user code here
+	    okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|28-getter|1|28-postInit
+	    // write post-init user code here
+	}//GEN-BEGIN:|28-getter|2|
+	return okCommand;
     }
-    //</editor-fold>//GEN-END:|14-getter|2|
-
-    /**
-     * Returns a display instance.
-     * @return the display instance.
-     */
-    public Display getDisplay() {
-        return Display.getDisplay(midlet);
-    }
-
-    /**
-     * Exits MIDlet.
-     * Note you have to implement proper MIDlet destroying.
-     */
-    public void exitMIDlet() {
-        switchDisplayable(null, null);
-        // midlet.destroyApp(true);
-        midlet.notifyDestroyed();
-    }
+    //</editor-fold>//GEN-END:|28-getter|2|
 }

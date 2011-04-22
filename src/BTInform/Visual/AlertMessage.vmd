@@ -19,6 +19,7 @@
                     <Property name="title" typeID="Pjava.lang.String" value="Valert"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R4"/>
                     <Property name="image" typeID="Cjavax.microedition.lcdui.Image" value="R12"/>
+                    <Property name="string" typeID="Pjava.lang.String" value="V "/>
                     <Property name="timeout" typeID="Pint" value="V-2"/>
                     <Component componentID="14" typeID="C#CommandEventSource">
                         <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R11"/>

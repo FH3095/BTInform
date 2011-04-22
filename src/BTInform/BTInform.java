@@ -46,7 +46,7 @@ public class BTInform extends MIDlet {
 	searchPC=new SearchPC(this);
 	switchDisplayable(searchPC.getSearchPC());
     }
-    
+
     public void resumeMIDlet()
     {
     }

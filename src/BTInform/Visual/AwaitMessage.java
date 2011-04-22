@@ -37,24 +37,6 @@ public class AwaitMessage implements CommandListener {
     }//GEN-BEGIN:|0-initialize|2|
     //</editor-fold>//GEN-END:|0-initialize|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: switchDisplayable ">//GEN-BEGIN:|2-switchDisplayable|0|2-preSwitch
-    /**
-     * Switches a current displayable in a display. The <code>display</code> instance is taken from <code>getDisplay</code> method. This method is used by all actions in the design for switching displayable.
-     * @param alert the Alert which is temporarily set to the display; if <code>null</code>, then <code>nextDisplayable</code> is set immediately
-     * @param nextDisplayable the Displayable to be set
-     */
-    public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
-        // write pre-switch user code here
-        Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
-        if (alert == null) {
-            display.setCurrent(nextDisplayable);
-        } else {
-            display.setCurrent(alert, nextDisplayable);
-        }//GEN-END:|2-switchDisplayable|1|2-postSwitch
-        // write post-switch user code here
-    }//GEN-BEGIN:|2-switchDisplayable|2|
-    //</editor-fold>//GEN-END:|2-switchDisplayable|2|
-
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: awaitMessage ">//GEN-BEGIN:|11-getter|0|11-preInit
     /**
      * Returns an initiliazed instance of awaitMessage component.
@@ -84,6 +66,7 @@ public class AwaitMessage implements CommandListener {
         if (displayable == awaitMessage) {//GEN-BEGIN:|4-commandAction|1|15-preAction
             if (command == exitCommand) {//GEN-END:|4-commandAction|1|15-preAction
                 // write pre-action user code here
+		midlet.exitMIDlet();
 //GEN-LINE:|4-commandAction|2|15-postAction
                 // write post-action user code here
             } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|13-preAction
@@ -125,22 +108,4 @@ public class AwaitMessage implements CommandListener {
         return exitCommand;
     }
     //</editor-fold>//GEN-END:|14-getter|2|
-
-    /**
-     * Returns a display instance.
-     * @return the display instance.
-     */
-    public Display getDisplay() {
-        return Display.getDisplay(midlet);
-    }
-
-    /**
-     * Exits MIDlet.
-     * Note you have to implement proper MIDlet destroying.
-     */
-    public void exitMIDlet() {
-        switchDisplayable(null, null);
-        // midlet.destroyApp(true);
-        midlet.notifyDestroyed();
-    }
 }
