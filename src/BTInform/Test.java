@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package BTInform;
 
 import javax.microedition.midlet.*;
@@ -6,25 +10,23 @@ import javax.microedition.lcdui.*;
 /**
  * @author A_FH
  */
-public class Main extends MIDlet implements CommandListener {
+public class Test extends MIDlet {
     
     private boolean midletPaused = false;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
-    private Form form;
-    private Command exitCommand;
     //</editor-fold>//GEN-END:|fields|0|
     /**
-     * The Main constructor.
+     * The Test constructor.
      */
-    public Main() {
+    public Test() {
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
     //<editor-fold defaultstate="collapsed" desc=" Generated Method: initialize ">//GEN-BEGIN:|0-initialize|0|0-preInitialize
     /**
-     * Initializes the application.
+     * Initilizes the application.
      * It is called only once when the MIDlet is started. The method is called before the <code>startMIDlet</code> method.
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
@@ -40,7 +42,7 @@ public class Main extends MIDlet implements CommandListener {
      */
     public void startMIDlet() {//GEN-END:|3-startMIDlet|0|3-preAction
         // write pre-action user code here
-        switchDisplayable(null, getForm());//GEN-LINE:|3-startMIDlet|1|3-postAction
+//GEN-LINE:|3-startMIDlet|1|3-postAction
         // write post-action user code here
     }//GEN-BEGIN:|3-startMIDlet|2|
     //</editor-fold>//GEN-END:|3-startMIDlet|2|
@@ -73,57 +75,6 @@ public class Main extends MIDlet implements CommandListener {
         // write post-switch user code here
     }//GEN-BEGIN:|5-switchDisplayable|2|
     //</editor-fold>//GEN-END:|5-switchDisplayable|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: form ">//GEN-BEGIN:|14-getter|0|14-preInit
-    /**
-     * Returns an initiliazed instance of form component.
-     * @return the initialized component instance
-     */
-    public Form getForm() {
-        if (form == null) {//GEN-END:|14-getter|0|14-preInit
-            // write pre-init user code here
-            form = new Form("Main");//GEN-BEGIN:|14-getter|1|14-postInit
-            form.addCommand(getExitCommand());
-            form.setCommandListener(this);//GEN-END:|14-getter|1|14-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|14-getter|2|
-        return form;
-    }
-    //</editor-fold>//GEN-END:|14-getter|2|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Method: commandAction for Displayables ">//GEN-BEGIN:|7-commandAction|0|7-preCommandAction
-    /**
-     * Called by a system to indicated that a command has been invoked on a particular displayable.
-     * @param command the Command that was invoked
-     * @param displayable the Displayable where the command was invoked
-     */
-    public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
-        // write pre-action user code here
-        if (displayable == form) {//GEN-BEGIN:|7-commandAction|1|18-preAction
-            if (command == exitCommand) {//GEN-END:|7-commandAction|1|18-preAction
-                // write pre-action user code here
-                exitMIDlet();//GEN-LINE:|7-commandAction|2|18-postAction
-                // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|3|7-postCommandAction
-        }//GEN-END:|7-commandAction|3|7-postCommandAction
-        // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|4|
-    //</editor-fold>//GEN-END:|7-commandAction|4|
-
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|17-getter|0|17-preInit
-    /**
-     * Returns an initiliazed instance of exitCommand component.
-     * @return the initialized component instance
-     */
-    public Command getExitCommand() {
-        if (exitCommand == null) {//GEN-END:|17-getter|0|17-preInit
-            // write pre-init user code here
-            exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|17-getter|1|17-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|17-getter|2|
-        return exitCommand;
-    }
-    //</editor-fold>//GEN-END:|17-getter|2|
 
     /**
      * Returns a display instance.

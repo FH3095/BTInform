@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualDesign projectType="vmd-midp" version="1">
+    <Document version="2">
+        <Component componentID="0" typeID="C#Root">
+            <Property name="version" typeID="Pjava.lang.String" value="VMIDP-2.0"/>
+            <Component componentID="1" typeID="C#PointsCategory">
+                <Component componentID="2" typeID="C#Display"/>
+            </Component>
+            <Component componentID="3" typeID="C#ControllersCategory">
+                <Component componentID="4" typeID="C#CommandListener"/>
+                <Component componentID="5" typeID="C#ItemCommandListener"/>
+                <Component componentID="6" typeID="C#ItemStateListener"/>
+            </Component>
+            <Component componentID="7" typeID="C#DisplayablesCategory">
+                <Component componentID="11" typeID="Cjavax.microedition.lcdui.Form">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VsearchPC"/>
+                    <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="commands" typeID="1C#CommandEventSource" value="A2:3_R133_R15"/>
+                    <Property name="title" typeID="Pjava.lang.String" value="VSearch PC"/>
+                    <Property name="commandListener" typeID="C#CommandListener" value="R4"/>
+                    <Component componentID="13" typeID="C#CommandEventSource">
+                        <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R11"/>
+                        <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R12"/>
+                    </Component>
+                    <Component componentID="15" typeID="C#CommandEventSource">
+                        <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R11"/>
+                        <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R14"/>
+                    </Component>
+                </Component>
+            </Component>
+            <Component componentID="8" typeID="C#CommandsCategory">
+                <Component componentID="12" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VexitCommand"/>
+                    <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VExit"/>
+                    <Property name="type" typeID="Pint" value="V7"/>
+                </Component>
+                <Component componentID="14" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VokCommand"/>
+                    <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VOk"/>
+                    <Property name="type" typeID="Pint" value="V4"/>
+                </Component>
+            </Component>
+            <Component componentID="9" typeID="C#ResourcesCategory"/>
+            <Component componentID="10" typeID="C#DatabindingCategory"/>
+        </Component>
+    </Document>
+    <FlowScene version="1">
+        <Node componentID="11" descriptorID="componentNode11" x="186" y="97"/>
+    </FlowScene>
+</VisualDesign>
