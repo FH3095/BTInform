@@ -1,7 +1,9 @@
 package BTInform;
 
+import BTInform.Bluetooth.BTClient;
 import BTInform.Visual.AlertMessage;
 import BTInform.Visual.AwaitMessage;
+import BTInform.Visual.ErrorMessage;
 import BTInform.Visual.SearchPC;
 import BTInform.Visual.SearchService;
 import javax.microedition.lcdui.Alert;
@@ -14,11 +16,13 @@ import javax.microedition.midlet.*;
  */
 public class BTInform extends MIDlet {
 
-    SearchPC searchPC;
-    SearchService searchService;
-    AwaitMessage awaitMessage;
-    AlertMessage alertMessage;
-    boolean paused;
+    private SearchPC searchPC;
+    private SearchService searchService;
+    private AwaitMessage awaitMessage;
+    private AlertMessage alertMessage;
+    
+    private BTClient btClient;
+    private boolean paused;
 
     public BTInform() {
 	paused = false;
@@ -26,6 +30,7 @@ public class BTInform extends MIDlet {
 	searchService = null;
 	awaitMessage = null;
 	alertMessage = null;
+	btClient=new BTClient(this);
     }
     
     public void switchDisplayable(Displayable nextDisplayable) {
@@ -89,11 +94,19 @@ public class BTInform extends MIDlet {
         return Display.getDisplay(this);
     }
     
+    public void displayError(String Error)
+    {
+	ErrorMessage errorForm=new ErrorMessage(this);
+	errorForm.setMessage(Error);
+	switchDisplayable(errorForm.getErrorMessage());
+    }
+    
     public void visualFlow(boolean forward)
     {
 	if(searchPC!=null)
 	{
 	    searchService=new SearchService(this);
+	    searchService.startDisplay();
 	    switchDisplayable(searchService.getSearchService());
 	    searchPC=null;
 	    return;
@@ -101,6 +114,7 @@ public class BTInform extends MIDlet {
 	if(searchService!=null)
 	{
 	    awaitMessage=new AwaitMessage(this);
+	    awaitMessage.startDisplay();
 	    switchDisplayable(awaitMessage.getAwaitMessage());
 	    searchService=null;
 	    return;
@@ -108,10 +122,17 @@ public class BTInform extends MIDlet {
 	if(awaitMessage!=null)
 	{
 	    alertMessage=new AlertMessage(this);
+	    alertMessage.startDisplay();
 	    switchDisplayable(alertMessage.getAlertMessage(), awaitMessage.getAwaitMessage());
 	    return;
 	}
 	searchPC=new SearchPC(this);
+	searchPC.startDisplay();
 	switchDisplayable(searchPC.getSearchPC());
+    }
+
+    public BTClient getBTClient()
+    {
+	return btClient;
     }
 }

@@ -1,12 +1,16 @@
 package BTInform.Visual;
 
 import BTInform.BTInform;
+import BTInform.Bluetooth.BTClient;
+import BTInform.Bluetooth.BTClientListener;
+import java.io.IOException;
+import javax.bluetooth.RemoteDevice;
 import javax.microedition.lcdui.*;
 
 /**
  * @author FH
  */
-public class SearchPC implements CommandListener {
+public class SearchPC implements CommandListener,BTClientListener {
     
     private BTInform midlet;
 
@@ -79,7 +83,8 @@ public class SearchPC implements CommandListener {
 	    searchPC.addCommand(getOkCommand());
 	    searchPC.setCommandListener(this);
 	    searchPC.setFitPolicy(Choice.TEXT_WRAP_DEFAULT);
-	    searchPC.setSelectCommand(null);//GEN-END:|20-getter|1|20-postInit
+	    searchPC.setSelectCommand(null);
+	    searchPC.setSelectedFlags(new boolean[] {  });//GEN-END:|20-getter|1|20-postInit
 	    // write post-init user code here
 	}//GEN-BEGIN:|20-getter|2|
 	return searchPC;
@@ -94,8 +99,9 @@ public class SearchPC implements CommandListener {
 	// enter pre-action user code here
 	String __selectedString = getSearchPC().getString(getSearchPC().getSelectedIndex());//GEN-LINE:|20-action|1|20-postAction
 	// enter post-action user code here
-    }//GEN-BEGIN:|20-action|2|
-    //</editor-fold>//GEN-END:|20-action|2|
+    }//GEN-BEGIN:|20-action|2|31-postAction
+    //</editor-fold>//GEN-END:|20-action|2|31-postAction
+
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|26-getter|0|26-preInit
     /**
@@ -126,4 +132,43 @@ public class SearchPC implements CommandListener {
 	return okCommand;
     }
     //</editor-fold>//GEN-END:|28-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: switchDisplayable ">//GEN-BEGIN:|2-switchDisplayable|0|2-preSwitch
+    /**
+     * Switches a current displayable in a display. The <code>display</code> instance is taken from <code>getDisplay</code> method. This method is used by all actions in the design for switching displayable.
+     * @param alert the Alert which is temporarily set to the display; if <code>null</code>, then <code>nextDisplayable</code> is set immediately
+     * @param nextDisplayable the Displayable to be set
+     */
+    public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
+	// write pre-switch user code here
+	Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
+	if (alert == null) {
+	    display.setCurrent(nextDisplayable);
+	} else {
+	    display.setCurrent(alert, nextDisplayable);
+	}//GEN-END:|2-switchDisplayable|1|2-postSwitch
+	// write post-switch user code here
+    }//GEN-BEGIN:|2-switchDisplayable|2|
+    //</editor-fold>//GEN-END:|2-switchDisplayable|2|
+
+    private Display getDisplay() {
+	return midlet.getDisplay();
+    }
+    
+    public void startDisplay()
+    {
+	midlet.getBTClient().start(this, BTClient.Jobs.DISCOVER_DEVICES);
+    }
+
+    public void BTFinished() {
+	RemoteDevice[] devices=midlet.getBTClient().getDevices();
+	for(int i=0;i<devices.length;++i)
+	{
+	    try {
+		searchPC.append(devices[i].getFriendlyName(true), null);
+	    } catch (IOException ex) {
+		searchPC.append(devices[i].getBluetoothAddress(), null);
+	    }
+	}
+    }
 }

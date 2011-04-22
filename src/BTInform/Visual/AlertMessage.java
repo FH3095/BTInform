@@ -92,4 +92,8 @@ public class AlertMessage {
     private Display getDisplay() {
 	return midlet.getDisplay();
     }
+    
+    public void startDisplay()
+    {
+    }
 }

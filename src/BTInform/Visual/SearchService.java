@@ -80,6 +80,7 @@ public class SearchService implements CommandListener {
 	    searchService.setCommandListener(this);
 	    searchService.setSelectCommand(null);//GEN-END:|16-getter|1|16-postInit
 	    // write post-init user code here
+	    initialize();
 	}//GEN-BEGIN:|16-getter|2|
 	return searchService;
     }
@@ -125,4 +126,8 @@ public class SearchService implements CommandListener {
 	return okCommand;
     }
     //</editor-fold>//GEN-END:|22-getter|2|
+
+    public void startDisplay()
+    {
+    }
 }

@@ -18,6 +18,7 @@
                     <Property name="commands" typeID="1C#CommandEventSource" value="A3:3_R213_R273_R29"/>
                     <Property name="title" typeID="Pjava.lang.String" value="VSearch PC"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R4"/>
+                    <Property name="elements" typeID="1C#ListElementEventSource" value="A0:"/>
                     <Property name="listType" typeID="Pint" value="V3"/>
                     <Property name="fitPolicy" typeID="Pint" value="V0"/>
                     <Component componentID="21" typeID="C#ListSelectCommandEventSource">

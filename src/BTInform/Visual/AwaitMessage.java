@@ -45,11 +45,12 @@ public class AwaitMessage implements CommandListener {
     public Form getAwaitMessage() {
 	if (awaitMessage == null) {//GEN-END:|11-getter|0|11-preInit
             // write pre-init user code here
-	    awaitMessage = new Form("form");//GEN-BEGIN:|11-getter|1|11-postInit
+	    awaitMessage = new Form("Await Message");//GEN-BEGIN:|11-getter|1|11-postInit
 	    awaitMessage.addCommand(getExitCommand());
 	    awaitMessage.addCommand(getOkCommand());
 	    awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
             // write post-init user code here
+	    initialize();
 	}//GEN-BEGIN:|11-getter|2|
 	return awaitMessage;
     }
@@ -133,5 +134,9 @@ public class AwaitMessage implements CommandListener {
 
     private Display getDisplay() {
 	return midlet.getDisplay();
+    }
+    
+    public void startDisplay()
+    {
     }
 }
