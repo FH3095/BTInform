@@ -52,10 +52,6 @@ public class AlertMessage {
     }
     //</editor-fold>//GEN-END:|11-getter|2|
 
-
-
-
-
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: alertImage ">//GEN-BEGIN:|12-getter|0|12-preInit
     /**
      * Returns an initiliazed instance of alertImage component.
