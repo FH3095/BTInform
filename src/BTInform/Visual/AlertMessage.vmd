@@ -15,13 +15,32 @@
                 <Component componentID="11" typeID="Cjavax.microedition.lcdui.Alert">
                     <Property name="instanceName" typeID="Pjava.lang.String" value="ValertMessage"/>
                     <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="commands" typeID="1C#CommandEventSource" value="A1:3_R14"/>
                     <Property name="title" typeID="Pjava.lang.String" value="Valert"/>
                     <Property name="commandListener" typeID="C#CommandListener" value="R4"/>
+                    <Property name="image" typeID="Cjavax.microedition.lcdui.Image" value="R12"/>
                     <Property name="timeout" typeID="Pint" value="V-2"/>
+                    <Component componentID="14" typeID="C#CommandEventSource">
+                        <Property name="displayable" typeID="Cjavax.microedition.lcdui.Displayable" value="R11"/>
+                        <Property name="command" typeID="Cjavax.microedition.lcdui.Command" value="R13"/>
+                    </Component>
                 </Component>
             </Component>
-            <Component componentID="8" typeID="C#CommandsCategory"/>
-            <Component componentID="9" typeID="C#ResourcesCategory"/>
+            <Component componentID="8" typeID="C#CommandsCategory">
+                <Component componentID="13" typeID="Cjavax.microedition.lcdui.Command">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="VbackCommand"/>
+                    <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="label" typeID="Pjava.lang.String" value="VBack"/>
+                    <Property name="type" typeID="Pint" value="V2"/>
+                </Component>
+            </Component>
+            <Component componentID="9" typeID="C#ResourcesCategory">
+                <Component componentID="12" typeID="Cjavax.microedition.lcdui.Image">
+                    <Property name="instanceName" typeID="Pjava.lang.String" value="ValertImage"/>
+                    <Property name="codeGenerated" typeID="Pboolean" value="Vtrue"/>
+                    <Property name="resourcePath" typeID="Pjava.lang.String" value="V/60px-Gtk-dialog-warning.svg.png"/>
+                </Component>
+            </Component>
             <Component componentID="10" typeID="C#DatabindingCategory"/>
         </Component>
     </Document>

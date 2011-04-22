@@ -10,12 +10,14 @@ import javax.microedition.lcdui.*;
 /**
  * @author A_FH
  */
-public class AlertMessage {
+public class AlertMessage implements CommandListener {
     
     private MIDlet midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Alert alertMessage;
+    private Command backCommand;
+    private Image alertImage;
     //</editor-fold>//GEN-END:|fields|0|
     /**
      * The AlertMessage constructor.
@@ -65,13 +67,68 @@ public class AlertMessage {
     public Alert getAlertMessage() {
         if (alertMessage == null) {//GEN-END:|11-getter|0|11-preInit
             // write pre-init user code here
-            alertMessage = new Alert("alert");//GEN-BEGIN:|11-getter|1|11-postInit
+            alertMessage = new Alert("alert", null, getAlertImage(), null);//GEN-BEGIN:|11-getter|1|11-postInit
+            alertMessage.addCommand(getBackCommand());
+            alertMessage.setCommandListener(this);
             alertMessage.setTimeout(Alert.FOREVER);//GEN-END:|11-getter|1|11-postInit
             // write post-init user code here
         }//GEN-BEGIN:|11-getter|2|
         return alertMessage;
     }
     //</editor-fold>//GEN-END:|11-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Method: commandAction for Displayables ">//GEN-BEGIN:|4-commandAction|0|4-preCommandAction
+    /**
+     * Called by a system to indicated that a command has been invoked on a particular displayable.
+     * @param command the Command that was invoked
+     * @param displayable the Displayable where the command was invoked
+     */
+    public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
+        // write pre-action user code here
+        if (displayable == alertMessage) {//GEN-BEGIN:|4-commandAction|1|14-preAction
+            if (command == backCommand) {//GEN-END:|4-commandAction|1|14-preAction
+                // write pre-action user code here
+//GEN-LINE:|4-commandAction|2|14-postAction
+                // write post-action user code here
+            }//GEN-BEGIN:|4-commandAction|3|4-postCommandAction
+        }//GEN-END:|4-commandAction|3|4-postCommandAction
+        // write post-action user code here
+    }//GEN-BEGIN:|4-commandAction|4|
+    //</editor-fold>//GEN-END:|4-commandAction|4|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: backCommand ">//GEN-BEGIN:|13-getter|0|13-preInit
+    /**
+     * Returns an initiliazed instance of backCommand component.
+     * @return the initialized component instance
+     */
+    public Command getBackCommand() {
+        if (backCommand == null) {//GEN-END:|13-getter|0|13-preInit
+            // write pre-init user code here
+            backCommand = new Command("Back", Command.BACK, 0);//GEN-LINE:|13-getter|1|13-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|13-getter|2|
+        return backCommand;
+    }
+    //</editor-fold>//GEN-END:|13-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: alertImage ">//GEN-BEGIN:|12-getter|0|12-preInit
+    /**
+     * Returns an initiliazed instance of alertImage component.
+     * @return the initialized component instance
+     */
+    public Image getAlertImage() {
+        if (alertImage == null) {//GEN-END:|12-getter|0|12-preInit
+            // write pre-init user code here
+            try {//GEN-BEGIN:|12-getter|1|12-@java.io.IOException
+                alertImage = Image.createImage("/60px-Gtk-dialog-warning.svg.png");
+            } catch (java.io.IOException e) {//GEN-END:|12-getter|1|12-@java.io.IOException
+                e.printStackTrace();
+            }//GEN-LINE:|12-getter|2|12-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|12-getter|3|
+        return alertImage;
+    }
+    //</editor-fold>//GEN-END:|12-getter|3|
 
     /**
      * Returns a display instance.
