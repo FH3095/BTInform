@@ -1,11 +1,9 @@
 package BluetoothNotify.Visual;
 
-import BluetoothNotify.Bluetooth.Client;
 import BluetoothNotify.Main;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.midlet.*;
 
 /**
  * @author FH
@@ -37,11 +35,10 @@ public class VisualMain {
 	public void switchDisplayable(Alert alert, Displayable nextDisplayable) {
 		synchronized (showingErrorMutex) {
 			if (showingError == false) {
-				Display display = getDisplay();
 				if (alert == null) {
-					display.setCurrent(nextDisplayable);
+					getDisplay().setCurrent(nextDisplayable);
 				} else {
-					display.setCurrent(alert, nextDisplayable);
+					getDisplay().setCurrent(alert, nextDisplayable);
 				}
 			}
 		}
@@ -53,10 +50,10 @@ public class VisualMain {
 
 	public void displayError(String Error) {
 		synchronized (showingErrorMutex) {
-			showingError = true;
-			ErrorMessage errorForm = new ErrorMessage(this);
+			ErrorMessage errorForm = new ErrorMessage(main);
 			errorForm.setMessage(Error);
 			switchDisplayable(errorForm.getErrorMessage());
+			showingError = true;
 		}
 	}
 

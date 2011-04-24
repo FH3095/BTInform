@@ -1,26 +1,27 @@
 package BluetoothNotify.Visual;
 
+import BluetoothNotify.Main;
 import javax.microedition.lcdui.*;
 
 /**
  * @author FH
  */
 public class ErrorMessage implements CommandListener {
-    
-    private VisualMain midlet;
 
+	private Main main;
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Form errorMessage;
     private StringItem stringItem;
     private Command exitCommand;
     //</editor-fold>//GEN-END:|fields|0|
-    /**
-     * The Error constructor.
-     * @param midlet the midlet used for getting
-     */
-    public ErrorMessage(VisualMain midlet) {
-	this.midlet = midlet;
-    }
+
+	/**
+	 * The Error constructor.
+	 * @param midlet the midlet used for getting
+	 */
+	public ErrorMessage(Main main) {
+		this.main = main;
+	}
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
@@ -30,9 +31,9 @@ public class ErrorMessage implements CommandListener {
      * It is called only once when the MIDlet is started. The method is called before the <code>startMIDlet</code> method.
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
-	// write pre-initialize user code here
+		// write pre-initialize user code here
 //GEN-LINE:|0-initialize|1|0-postInitialize
-	// write post-initialize user code here
+		// write post-initialize user code here
     }//GEN-BEGIN:|0-initialize|2|
     //</editor-fold>//GEN-END:|0-initialize|2|
 
@@ -43,14 +44,14 @@ public class ErrorMessage implements CommandListener {
      * @param nextDisplayable the Displayable to be set
      */
     public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
-	// write pre-switch user code here
+		// write pre-switch user code here
 	Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
 	if (alert == null) {
 	    display.setCurrent(nextDisplayable);
 	} else {
 	    display.setCurrent(alert, nextDisplayable);
 	}//GEN-END:|2-switchDisplayable|1|2-postSwitch
-	// write post-switch user code here
+		// write post-switch user code here
     }//GEN-BEGIN:|2-switchDisplayable|2|
     //</editor-fold>//GEN-END:|2-switchDisplayable|2|
 
@@ -61,16 +62,16 @@ public class ErrorMessage implements CommandListener {
      * @param displayable the Displayable where the command was invoked
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
-	// write pre-action user code here
+		// write pre-action user code here
 	if (displayable == errorMessage) {//GEN-BEGIN:|4-commandAction|1|13-preAction
 	    if (command == exitCommand) {//GEN-END:|4-commandAction|1|13-preAction
-		// write pre-action user code here
-		midlet.exitMIDlet();
+			// write pre-action user code here
+			main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|2|13-postAction
-		// write post-action user code here
+			// write post-action user code here
 	    }//GEN-BEGIN:|4-commandAction|3|4-postCommandAction
 	}//GEN-END:|4-commandAction|3|4-postCommandAction
-	// write post-action user code here
+		// write post-action user code here
     }//GEN-BEGIN:|4-commandAction|4|
     //</editor-fold>//GEN-END:|4-commandAction|4|
 
@@ -81,11 +82,11 @@ public class ErrorMessage implements CommandListener {
      */
     public Form getErrorMessage() {
 	if (errorMessage == null) {//GEN-END:|11-getter|0|11-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    errorMessage = new Form("Error", new Item[] { getStringItem() });//GEN-BEGIN:|11-getter|1|11-postInit
 	    errorMessage.addCommand(getExitCommand());
 	    errorMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|11-getter|2|
 	return errorMessage;
     }
@@ -98,9 +99,9 @@ public class ErrorMessage implements CommandListener {
      */
     public Command getExitCommand() {
 	if (exitCommand == null) {//GEN-END:|12-getter|0|12-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|12-getter|1|12-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|12-getter|2|
 	return exitCommand;
     }
@@ -113,24 +114,23 @@ public class ErrorMessage implements CommandListener {
      */
     public StringItem getStringItem() {
 	if (stringItem == null) {//GEN-END:|15-getter|0|15-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    stringItem = new StringItem("Error-Message\n", "", Item.PLAIN);//GEN-LINE:|15-getter|1|15-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|15-getter|2|
 	return stringItem;
     }
     //</editor-fold>//GEN-END:|15-getter|2|
 
-    /**
-     * Returns a display instance.
-     * @return the display instance.
-     */
-    public Display getDisplay() {
-	return midlet.getDisplay();
-    }
-    
-    public void setMessage(String Message)
-    {
-	getStringItem().setText(Message);
-    }
+	/**
+	 * Returns a display instance.
+	 * @return the display instance.
+	 */
+	public Display getDisplay() {
+		return main.getVisualMain().getDisplay();
+	}
+
+	public void setMessage(String Message) {
+		getStringItem().setText(Message);
+	}
 }
