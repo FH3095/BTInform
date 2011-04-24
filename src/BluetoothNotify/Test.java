@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package BTInform;
+package BluetoothNotify;
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;

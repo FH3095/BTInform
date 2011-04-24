@@ -1,6 +1,5 @@
-package BTInform.Visual;
+package BluetoothNotify.Visual;
 
-import BTInform.BTInform;
 import javax.microedition.lcdui.*;
 
 /**
@@ -8,7 +7,7 @@ import javax.microedition.lcdui.*;
  */
 public class SearchService implements CommandListener {
     
-    private BTInform midlet;
+    private VisualMain midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private List searchService;
@@ -19,7 +18,7 @@ public class SearchService implements CommandListener {
      * The SearchService constructor.
      * @param midlet the midlet used for getting
      */
-    public SearchService(BTInform midlet) {
+    public SearchService(VisualMain midlet) {
         this.midlet = midlet;
     }
 

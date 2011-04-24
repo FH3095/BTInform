@@ -1,6 +1,5 @@
-package BTInform.Visual;
+package BluetoothNotify.Visual;
 
-import BTInform.BTInform;
 import javax.microedition.lcdui.*;
 
 /**
@@ -8,7 +7,7 @@ import javax.microedition.lcdui.*;
  */
 public class AlertMessage {
 
-    private BTInform midlet;
+    private VisualMain midlet;
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Alert alertMessage;
     private Image alertImage;
@@ -18,7 +17,7 @@ public class AlertMessage {
      * The AlertMessage constructor.
      * @param midlet the midlet used for getting
      */
-    public AlertMessage(BTInform midlet) {
+    public AlertMessage(VisualMain midlet) {
 	this.midlet = midlet;
     }
 

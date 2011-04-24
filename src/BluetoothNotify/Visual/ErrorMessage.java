@@ -1,6 +1,5 @@
-package BTInform.Visual;
+package BluetoothNotify.Visual;
 
-import BTInform.BTInform;
 import javax.microedition.lcdui.*;
 
 /**
@@ -8,7 +7,7 @@ import javax.microedition.lcdui.*;
  */
 public class ErrorMessage implements CommandListener {
     
-    private BTInform midlet;
+    private VisualMain midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Form errorMessage;
@@ -19,7 +18,7 @@ public class ErrorMessage implements CommandListener {
      * The Error constructor.
      * @param midlet the midlet used for getting
      */
-    public ErrorMessage(BTInform midlet) {
+    public ErrorMessage(VisualMain midlet) {
 	this.midlet = midlet;
     }
 

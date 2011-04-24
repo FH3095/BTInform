@@ -1,11 +1,12 @@
-package BTInform;
+package BluetoothNotify.Visual;
 
-import BTInform.Bluetooth.BTClient;
-import BTInform.Visual.AlertMessage;
-import BTInform.Visual.AwaitMessage;
-import BTInform.Visual.ErrorMessage;
-import BTInform.Visual.SearchPC;
-import BTInform.Visual.SearchService;
+import BluetoothNotify.Bluetooth.Client;
+import BluetoothNotify.Visual.AlertMessage;
+import BluetoothNotify.Visual.AwaitMessage;
+import BluetoothNotify.Visual.ErrorMessage;
+import BluetoothNotify.Visual.SearchPC;
+import BluetoothNotify.Visual.SearchService;
+import javax.microedition.io.ConnectionNotFoundException;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
@@ -14,23 +15,23 @@ import javax.microedition.midlet.*;
 /**
  * @author FH
  */
-public class BTInform extends MIDlet {
+public class VisualMain extends MIDlet {
 
     private SearchPC searchPC;
     private SearchService searchService;
     private AwaitMessage awaitMessage;
     private AlertMessage alertMessage;
     
-    private BTClient btClient;
+    private Client btClient;
     private boolean paused;
 
-    public BTInform() {
+    public VisualMain() {
 	paused = false;
 	searchPC = null;
 	searchService = null;
 	awaitMessage = null;
 	alertMessage = null;
-	btClient=new BTClient(this);
+	btClient=new Client(this);
     }
     
     public void switchDisplayable(Displayable nextDisplayable) {
@@ -131,7 +132,7 @@ public class BTInform extends MIDlet {
 	switchDisplayable(searchPC.getSearchPC());
     }
 
-    public BTClient getBTClient()
+    public Client getBTClient()
     {
 	return btClient;
     }

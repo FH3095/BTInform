@@ -1,8 +1,7 @@
-package BTInform.Visual;
+package BluetoothNotify.Visual;
 
-import BTInform.BTInform;
-import BTInform.Bluetooth.BTClient;
-import BTInform.Bluetooth.BTClientListener;
+import BluetoothNotify.Bluetooth.Client;
+import BluetoothNotify.Bluetooth.ClientEventListener;
 import java.io.IOException;
 import javax.bluetooth.RemoteDevice;
 import javax.microedition.lcdui.*;
@@ -10,9 +9,9 @@ import javax.microedition.lcdui.*;
 /**
  * @author FH
  */
-public class SearchPC implements CommandListener,BTClientListener {
+public class SearchPC implements CommandListener,ClientEventListener {
     
-    private BTInform midlet;
+    private VisualMain midlet;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private List searchPC;
@@ -23,7 +22,7 @@ public class SearchPC implements CommandListener,BTClientListener {
      * The SearchPC constructor.
      * @param midlet the midlet used for getting
      */
-    public SearchPC(BTInform midlet) {
+    public SearchPC(VisualMain midlet) {
         this.midlet = midlet;
     }
 
@@ -157,7 +156,7 @@ public class SearchPC implements CommandListener,BTClientListener {
     
     public void startDisplay()
     {
-	midlet.getBTClient().start(this, BTClient.Jobs.DISCOVER_DEVICES);
+	midlet.getBTClient().start(this, Client.Jobs.DISCOVER_DEVICES);
     }
 
     public void BTFinished() {

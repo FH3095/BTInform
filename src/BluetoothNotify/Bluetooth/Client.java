@@ -1,6 +1,6 @@
-package BTInform.Bluetooth;
+package BluetoothNotify.Bluetooth;
 
-import BTInform.BTInform;
+import BluetoothNotify.Visual.VisualMain;
 import java.util.Vector;
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DeviceClass;
@@ -15,7 +15,7 @@ import javax.bluetooth.UUID;
  *
  * @author FH
  */
-public class BTClient implements DiscoveryListener, Runnable {
+public class Client implements DiscoveryListener, Runnable {
     public class Jobs
     {
 	private Jobs() {}
@@ -26,21 +26,21 @@ public class BTClient implements DiscoveryListener, Runnable {
     };
 
     private short job;
-    private boolean waiting;
+    private boolean working;
     private Thread me;
-    private BTInform midlet;
-    private BTClientListener listener;
-    
+    private VisualMain midlet;
+    private ClientEventListener listener;
+
     private Vector devices;
     private int discoverType;
     private Vector services;
 
     private LocalDevice localDevice;
     private DiscoveryAgent discoveryAgent;
-    private UUID[] uuidSet = {new UUID(0x1101) };
-    private int[] attrSet = {0x4E18461};
+    private final UUID[] uuidSet = {new UUID(0x1101) };
+    private final int[] attrSet = {0x4E18461};
 
-    public BTClient(BTInform MIDlet)
+    public Client(VisualMain MIDlet)
     {
 	this.midlet=MIDlet;
 	reInit();
@@ -51,7 +51,7 @@ public class BTClient implements DiscoveryListener, Runnable {
 	}
 	discoveryAgent=localDevice.getDiscoveryAgent();
     }
-    
+
     private void reInit()
     {
 	job=Jobs.NONE;
@@ -59,14 +59,14 @@ public class BTClient implements DiscoveryListener, Runnable {
 	me=null;
     }
 
-    public void start(BTClientListener Listener,short Job)
+    public void start(ClientEventListener Listener,short Job)
     {
 	this.listener=Listener;
 	this.job=Job;
 	me=new Thread(this);
 	me.start();
     }
-    
+
     public short getJob()
     {
 	return job;
@@ -86,7 +86,7 @@ public class BTClient implements DiscoveryListener, Runnable {
 
     public void inquiryCompleted(int DiscType) {
 	this.discoverType=DiscType;
-	waiting=false;
+	working=false;
     }
 
     public void serviceSearchCompleted(int i, int i1) {
@@ -113,7 +113,7 @@ public class BTClient implements DiscoveryListener, Runnable {
 
     private boolean runDiscoverDevices()
     {
-	waiting=true;
+	working=true;
 	devices=new Vector();
 
 	try {
@@ -124,7 +124,7 @@ public class BTClient implements DiscoveryListener, Runnable {
             return true;
         }
 	
-	while(waiting==true)
+	while(working==true)
 	{
 	    try {
 		Thread.sleep(750);
@@ -158,18 +158,23 @@ public class BTClient implements DiscoveryListener, Runnable {
     {
 	services=new Vector();
     }
-    
+
     public RemoteDevice[] getDevices()
     {
 	RemoteDevice[] devices=new RemoteDevice[this.devices.size()];
 	this.devices.copyInto(devices);
 	return devices;
     }
-    
+
     public ServiceRecord[] getServices()
     {
 	ServiceRecord[] services=new ServiceRecord[this.devices.size()];
 	this.services.copyInto(services);
 	return services;
+    }
+    
+    private void waitWhileWorking()
+    {
+	
     }
 }
