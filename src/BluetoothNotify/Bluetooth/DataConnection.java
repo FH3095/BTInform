@@ -1,6 +1,8 @@
 package BluetoothNotify.Bluetooth;
 
 import BluetoothNotify.Main;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
@@ -11,18 +13,29 @@ import javax.microedition.io.StreamConnection;
 public class DataConnection implements Runnable {
 
 	private Main main;
+	private Thread me;
+	private boolean stop;
+	private String connectionURL;
 
 	public DataConnection(Main main) {
 		this.main = main;
+		connectionURL = "";
+		reInit();
 	}
 
-	public void start(String ConnectionURL) {
+	private void reInit() {
+		stop = false;
+	}
+
+	public void start() {
+		me = new Thread(this);
+		me.start();
 	}
 
 	public void run() {
 
 		try {
-			StreamConnection connection = (StreamConnection) Connector.open(btConnectionURL);
+			StreamConnection connection = (StreamConnection) Connector.open(connectionURL);
 
 			//
 			// open an input stream to get some data
@@ -31,8 +44,7 @@ public class DataConnection implements Runnable {
 			InputStream in = connection.openInputStream();
 
 			byte[] serialData;
-			readData = true;
-			while (readData == true) {
+			while (!stop) {
 				int lengthavai = 0;
 				lengthavai = in.available();
 
@@ -40,7 +52,7 @@ public class DataConnection implements Runnable {
 					serialData = new byte[lengthavai];
 					int length = in.read(serialData);
 					System.out.println("data read: " + new String(serialData));
-					dataViewForm.append(new String(serialData));
+					//dataViewForm.append(new String(serialData));
 				}
 			}
 
@@ -50,5 +62,13 @@ public class DataConnection implements Runnable {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
+
+	public String getConnectionURL() {
+		return connectionURL;
+	}
+
+	public void setConnectionURL(String ConnectionURL) {
+		this.connectionURL = ConnectionURL;
 	}
 }
