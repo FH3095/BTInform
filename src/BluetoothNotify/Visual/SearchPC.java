@@ -13,6 +13,7 @@ import javax.microedition.lcdui.*;
 public class SearchPC implements CommandListener, ClientEventListener {
 
 	private Main main;
+	RemoteDevice[] devices;
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private List searchPC;
     private Command exitCommand;
@@ -25,6 +26,7 @@ public class SearchPC implements CommandListener, ClientEventListener {
 	 */
 	public SearchPC(Main main) {
 		this.main = main;
+		devices = null;
 	}
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -61,9 +63,10 @@ public class SearchPC implements CommandListener, ClientEventListener {
 			// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|29-preAction
 			// write pre-action user code here
-			main.getVisualMain().visualFlow(true);
+			main.getBluetoothClient().addParameter("RemoteDevice", devices[searchPC.getSelectedIndex()]);
 //GEN-LINE:|4-commandAction|6|29-postAction
 			// write post-action user code here
+			main.getVisualMain().visualFlow(true);
 	    }//GEN-BEGIN:|4-commandAction|7|4-postCommandAction
 	}//GEN-END:|4-commandAction|7|4-postCommandAction
 		// write post-action user code here
@@ -158,8 +161,8 @@ public class SearchPC implements CommandListener, ClientEventListener {
 		main.getBluetoothClient().start(this, Client.Jobs.DISCOVER_DEVICES);
 	}
 
-	public void BTFinished() {
-		RemoteDevice[] devices = main.getBluetoothClient().getDevices();
+	public void BluetoothClientFinishedJob(short Job) {
+		devices = main.getBluetoothClient().getDevices();
 		for (int i = 0; i < devices.length; ++i) {
 			try {
 				searchPC.append(devices[i].getFriendlyName(true), null);

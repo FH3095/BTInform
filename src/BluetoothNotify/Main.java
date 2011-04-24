@@ -1,6 +1,7 @@
 package BluetoothNotify;
 
 import BluetoothNotify.Bluetooth.Client;
+import BluetoothNotify.Bluetooth.DataConnection;
 import BluetoothNotify.Visual.VisualMain;
 import javax.microedition.midlet.MIDlet;
 
@@ -10,12 +11,14 @@ import javax.microedition.midlet.MIDlet;
 public class Main extends MIDlet {
 
 	private Client bluetoothClient;
+	private DataConnection dataConnection;
 	private VisualMain visualMain;
 	private boolean paused;
 
 	public Main() {
 		paused = false;
 		bluetoothClient = new Client(this);
+		dataConnection = new DataConnection(this);
 		visualMain = new VisualMain(this);
 	}
 
@@ -53,5 +56,9 @@ public class Main extends MIDlet {
 
 	public VisualMain getVisualMain() {
 		return visualMain;
+	}
+
+	public DataConnection getDataConnection() {
+		return dataConnection;
 	}
 }

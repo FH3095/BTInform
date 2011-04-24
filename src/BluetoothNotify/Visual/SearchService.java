@@ -1,27 +1,32 @@
 package BluetoothNotify.Visual;
 
+import BluetoothNotify.Bluetooth.Client;
+import BluetoothNotify.Bluetooth.ClientEventListener;
 import BluetoothNotify.Main;
+import javax.bluetooth.ServiceRecord;
 import javax.microedition.lcdui.*;
 
 /**
  * @author FH
  */
-public class SearchService implements CommandListener {
-    
-    private Main main;
+public class SearchService implements CommandListener, ClientEventListener {
 
+	private Main main;
+	private ServiceRecord[] serviceRecords;
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private List searchService;
     private Command exitCommand;
     private Command okCommand;
     //</editor-fold>//GEN-END:|fields|0|
-    /**
-     * The SearchService constructor.
-     * @param midlet the midlet used for getting
-     */
-    public SearchService(Main main) {
-        this.main = main;
-    }
+
+	/**
+	 * The SearchService constructor.
+	 * @param midlet the midlet used for getting
+	 */
+	public SearchService(Main main) {
+		this.main = main;
+		serviceRecords = null;
+	}
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
@@ -31,9 +36,9 @@ public class SearchService implements CommandListener {
      * It is called only once when the MIDlet is started. The method is called before the <code>startMIDlet</code> method.
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
-        // write pre-initialize user code here
+		// write pre-initialize user code here
 //GEN-LINE:|0-initialize|1|0-postInitialize
-        // write post-initialize user code here
+		// write post-initialize user code here
     }//GEN-BEGIN:|0-initialize|2|
     //</editor-fold>//GEN-END:|0-initialize|2|
 
@@ -44,25 +49,26 @@ public class SearchService implements CommandListener {
      * @param displayable the Displayable where the command was invoked
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
-        // write pre-action user code here
+		// write pre-action user code here
 	if (displayable == searchService) {//GEN-BEGIN:|4-commandAction|1|18-preAction
 	    if (command == List.SELECT_COMMAND) {//GEN-END:|4-commandAction|1|18-preAction
-		// write pre-action user code here
+			// write pre-action user code here
 		searchServiceAction();//GEN-LINE:|4-commandAction|2|18-postAction
-		// write post-action user code here
+			// write post-action user code here
 	    } else if (command == exitCommand) {//GEN-LINE:|4-commandAction|3|21-preAction
-		// write pre-action user code here
-		main.getVisualMain().exitMIDlet();
+			// write pre-action user code here
+			main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|4|21-postAction
-		// write post-action user code here
+			// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|23-preAction
-		// write pre-action user code here
-		main.getVisualMain().visualFlow(true);
+			// write pre-action user code here
+			main.getBluetoothClient().addParameter("ConnectionURL", serviceRecords[searchService.getSelectedIndex()].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
 //GEN-LINE:|4-commandAction|6|23-postAction
-		// write post-action user code here
+			// write post-action user code here
+			main.getVisualMain().visualFlow(true);
 	    }//GEN-BEGIN:|4-commandAction|7|4-postCommandAction
 	}//GEN-END:|4-commandAction|7|4-postCommandAction
-        // write post-action user code here
+		// write post-action user code here
     }//GEN-BEGIN:|4-commandAction|8|
     //</editor-fold>//GEN-END:|4-commandAction|8|
 
@@ -73,14 +79,14 @@ public class SearchService implements CommandListener {
      */
     public List getSearchService() {
 	if (searchService == null) {//GEN-END:|16-getter|0|16-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    searchService = new List("Search Service", Choice.IMPLICIT);//GEN-BEGIN:|16-getter|1|16-postInit
 	    searchService.addCommand(getExitCommand());
 	    searchService.addCommand(getOkCommand());
 	    searchService.setCommandListener(this);
 	    searchService.setSelectCommand(null);//GEN-END:|16-getter|1|16-postInit
-	    // write post-init user code here
-	    initialize();
+		// write post-init user code here
+		initialize();
 	}//GEN-BEGIN:|16-getter|2|
 	return searchService;
     }
@@ -91,9 +97,9 @@ public class SearchService implements CommandListener {
      * Performs an action assigned to the selected list element in the searchService component.
      */
     public void searchServiceAction() {//GEN-END:|16-action|0|16-preAction
-	// enter pre-action user code here
+		// enter pre-action user code here
 	String __selectedString = getSearchService().getString(getSearchService().getSelectedIndex());//GEN-LINE:|16-action|1|16-postAction
-	// enter post-action user code here
+		// enter post-action user code here
     }//GEN-BEGIN:|16-action|2|
     //</editor-fold>//GEN-END:|16-action|2|
 
@@ -104,9 +110,9 @@ public class SearchService implements CommandListener {
      */
     public Command getExitCommand() {
 	if (exitCommand == null) {//GEN-END:|20-getter|0|20-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|20-getter|1|20-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|20-getter|2|
 	return exitCommand;
     }
@@ -119,15 +125,22 @@ public class SearchService implements CommandListener {
      */
     public Command getOkCommand() {
 	if (okCommand == null) {//GEN-END:|22-getter|0|22-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|22-getter|1|22-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|22-getter|2|
 	return okCommand;
     }
     //</editor-fold>//GEN-END:|22-getter|2|
 
-    public void startDisplay()
-    {
-    }
+	public void startDisplay() {
+		main.getBluetoothClient().start(this, Client.Jobs.SEARCH_SERVICES);
+	}
+
+	public void BluetoothClientFinishedJob(short Job) {
+		serviceRecords = main.getBluetoothClient().getServices();
+		for (int i = 0; i < serviceRecords.length; ++i) {
+			searchService.append(serviceRecords[i].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false), null);
+		}
+	}
 }
