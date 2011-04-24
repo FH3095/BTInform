@@ -1,5 +1,6 @@
 package BluetoothNotify.Visual;
 
+import BluetoothNotify.Main;
 import javax.microedition.lcdui.*;
 
 /**
@@ -7,7 +8,7 @@ import javax.microedition.lcdui.*;
  */
 public class SearchService implements CommandListener {
     
-    private VisualMain midlet;
+    private Main main;
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private List searchService;
@@ -18,8 +19,8 @@ public class SearchService implements CommandListener {
      * The SearchService constructor.
      * @param midlet the midlet used for getting
      */
-    public SearchService(VisualMain midlet) {
-        this.midlet = midlet;
+    public SearchService(Main main) {
+        this.main = main;
     }
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
@@ -51,12 +52,12 @@ public class SearchService implements CommandListener {
 		// write post-action user code here
 	    } else if (command == exitCommand) {//GEN-LINE:|4-commandAction|3|21-preAction
 		// write pre-action user code here
-		midlet.exitMIDlet();
+		main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|4|21-postAction
 		// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|23-preAction
 		// write pre-action user code here
-		midlet.visualFlow(true);
+		main.getVisualMain().visualFlow(true);
 //GEN-LINE:|4-commandAction|6|23-postAction
 		// write post-action user code here
 	    }//GEN-BEGIN:|4-commandAction|7|4-postCommandAction

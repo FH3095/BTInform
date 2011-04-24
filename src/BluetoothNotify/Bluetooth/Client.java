@@ -1,5 +1,6 @@
 package BluetoothNotify.Bluetooth;
 
+import BluetoothNotify.Main;
 import BluetoothNotify.Visual.VisualMain;
 import java.util.Vector;
 import javax.bluetooth.BluetoothStateException;
@@ -28,7 +29,7 @@ public class Client implements DiscoveryListener, Runnable {
     private short job;
     private boolean working;
     private Thread me;
-    private VisualMain midlet;
+    private Main main;
     private ClientEventListener listener;
 
     private Vector devices;
@@ -40,14 +41,14 @@ public class Client implements DiscoveryListener, Runnable {
     private final UUID[] uuidSet = {new UUID(0x1101) };
     private final int[] attrSet = {0x4E18461};
 
-    public Client(VisualMain MIDlet)
+    public Client(Main main)
     {
-	this.midlet=MIDlet;
+	this.main=main;
 	reInit();
 	try {
 	    localDevice=LocalDevice.getLocalDevice();
 	} catch (BluetoothStateException ex) {
-	    midlet.displayError(ex.getMessage());
+	    main.getVisualMain().displayError(ex.getMessage());
 	}
 	discoveryAgent=localDevice.getDiscoveryAgent();
     }
@@ -119,7 +120,7 @@ public class Client implements DiscoveryListener, Runnable {
 	try {
             discoveryAgent.startInquiry(DiscoveryAgent.GIAC, this);
         } catch (BluetoothStateException e) {
-            midlet.displayError("Can't start inquiry now: " + e);
+            main.getVisualMain().displayError("Can't start inquiry now: " + e);
 
             return true;
         }
@@ -134,7 +135,7 @@ public class Client implements DiscoveryListener, Runnable {
 
         switch (discoverType) {
         case INQUIRY_ERROR:
-            midlet.displayError("Device discovering error.");
+            main.getVisualMain().displayError("Device discovering error.");
 	    break;
 
         case INQUIRY_TERMINATED:
@@ -143,12 +144,12 @@ public class Client implements DiscoveryListener, Runnable {
 
         case INQUIRY_COMPLETED:
             if (devices.isEmpty()) {
-                midlet.displayError("No devices in range.");
+                main.getVisualMain().displayError("No devices in range.");
             }
             break;
 
         default:
-            midlet.displayError("system error:" + " unexpected device discovery code: " + discoverType);
+            main.getVisualMain().displayError("system error:" + " unexpected device discovery code: " + discoverType);
             return false;
         }
 	return true;

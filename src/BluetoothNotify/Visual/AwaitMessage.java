@@ -1,26 +1,27 @@
 package BluetoothNotify.Visual;
 
+import BluetoothNotify.Main;
 import javax.microedition.lcdui.*;
 
 /**
  * @author FH
  */
 public class AwaitMessage implements CommandListener {
-    
-    private VisualMain midlet;
 
+	private Main main;
     //<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
     private Form awaitMessage;
     private Command exitCommand;
     private Command okCommand;
     //</editor-fold>//GEN-END:|fields|0|
-    /**
-     * The AwaitMessage constructor.
-     * @param midlet the midlet used for getting
-     */
-    public AwaitMessage(VisualMain midlet) {
-        this.midlet = midlet;
-    }
+
+	/**
+	 * The AwaitMessage constructor.
+	 * @param midlet the midlet used for getting
+	 */
+	public AwaitMessage(Main main) {
+		this.main = main;
+	}
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Methods ">//GEN-BEGIN:|methods|0|
     //</editor-fold>//GEN-END:|methods|0|
@@ -30,9 +31,9 @@ public class AwaitMessage implements CommandListener {
      * It is called only once when the MIDlet is started. The method is called before the <code>startMIDlet</code> method.
      */
     private void initialize() {//GEN-END:|0-initialize|0|0-preInitialize
-        // write pre-initialize user code here
+		// write pre-initialize user code here
 //GEN-LINE:|0-initialize|1|0-postInitialize
-        // write post-initialize user code here
+		// write post-initialize user code here
     }//GEN-BEGIN:|0-initialize|2|
     //</editor-fold>//GEN-END:|0-initialize|2|
 
@@ -43,13 +44,13 @@ public class AwaitMessage implements CommandListener {
      */
     public Form getAwaitMessage() {
 	if (awaitMessage == null) {//GEN-END:|11-getter|0|11-preInit
-            // write pre-init user code here
+		// write pre-init user code here
 	    awaitMessage = new Form("Await Message");//GEN-BEGIN:|11-getter|1|11-postInit
 	    awaitMessage.addCommand(getExitCommand());
 	    awaitMessage.addCommand(getOkCommand());
 	    awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
-            // write post-init user code here
-	    initialize();
+		// write post-init user code here
+		initialize();
 	}//GEN-BEGIN:|11-getter|2|
 	return awaitMessage;
     }
@@ -62,26 +63,23 @@ public class AwaitMessage implements CommandListener {
      * @param displayable the Displayable where the command was invoked
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|4-commandAction|0|4-preCommandAction
-        // write pre-action user code here
+		// write pre-action user code here
 	if (displayable == awaitMessage) {//GEN-BEGIN:|4-commandAction|1|15-preAction
 	    if (command == exitCommand) {//GEN-END:|4-commandAction|1|15-preAction
-                // write pre-action user code here
-		midlet.exitMIDlet();
+			// write pre-action user code here
+			main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|2|15-postAction
-                // write post-action user code here
+			// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|19-preAction
-		// write pre-action user code here
-		midlet.visualFlow(true);
+			// write pre-action user code here
+			main.getVisualMain().visualFlow(true);
 //GEN-LINE:|4-commandAction|4|19-postAction
-		// write post-action user code here
+			// write post-action user code here
 	    }//GEN-BEGIN:|4-commandAction|5|4-postCommandAction
 	}//GEN-END:|4-commandAction|5|4-postCommandAction
-        // write post-action user code here
+		// write post-action user code here
     }//GEN-BEGIN:|4-commandAction|6|
     //</editor-fold>//GEN-END:|4-commandAction|6|
-
-
-
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|14-getter|0|14-preInit
     /**
@@ -90,9 +88,9 @@ public class AwaitMessage implements CommandListener {
      */
     public Command getExitCommand() {
 	if (exitCommand == null) {//GEN-END:|14-getter|0|14-preInit
-            // write pre-init user code here
+		// write pre-init user code here
 	    exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|14-getter|1|14-postInit
-            // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|14-getter|2|
 	return exitCommand;
     }
@@ -105,14 +103,14 @@ public class AwaitMessage implements CommandListener {
      * @param nextDisplayable the Displayable to be set
      */
     public void switchDisplayable(Alert alert, Displayable nextDisplayable) {//GEN-END:|2-switchDisplayable|0|2-preSwitch
-	// write pre-switch user code here
+		// write pre-switch user code here
 	Display display = getDisplay();//GEN-BEGIN:|2-switchDisplayable|1|2-postSwitch
 	if (alert == null) {
 	    display.setCurrent(nextDisplayable);
 	} else {
 	    display.setCurrent(alert, nextDisplayable);
 	}//GEN-END:|2-switchDisplayable|1|2-postSwitch
-	// write post-switch user code here
+		// write post-switch user code here
     }//GEN-BEGIN:|2-switchDisplayable|2|
     //</editor-fold>//GEN-END:|2-switchDisplayable|2|
 
@@ -123,19 +121,18 @@ public class AwaitMessage implements CommandListener {
      */
     public Command getOkCommand() {
 	if (okCommand == null) {//GEN-END:|18-getter|0|18-preInit
-	    // write pre-init user code here
+		// write pre-init user code here
 	    okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|18-getter|1|18-postInit
-	    // write post-init user code here
+		// write post-init user code here
 	}//GEN-BEGIN:|18-getter|2|
 	return okCommand;
     }
     //</editor-fold>//GEN-END:|18-getter|2|
 
-    private Display getDisplay() {
-	return midlet.getDisplay();
-    }
-    
-    public void startDisplay()
-    {
-    }
+	private Display getDisplay() {
+		return main.getVisualMain().getDisplay();
+	}
+
+	public void startDisplay() {
+	}
 }
