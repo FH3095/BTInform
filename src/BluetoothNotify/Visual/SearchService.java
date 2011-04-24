@@ -62,7 +62,7 @@ public class SearchService implements CommandListener, ClientEventListener {
 			// write post-action user code here
 	    } else if (command == okCommand) {//GEN-LINE:|4-commandAction|5|23-preAction
 			// write pre-action user code here
-			main.getBluetoothClient().addParameter("ConnectionURL", serviceRecords[searchService.getSelectedIndex()].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
+			main.getDataConnection().setConnectionURL(serviceRecords[searchService.getSelectedIndex()].getConnectionURL(ServiceRecord.NOAUTHENTICATE_NOENCRYPT, false));
 //GEN-LINE:|4-commandAction|6|23-postAction
 			// write post-action user code here
 			main.getVisualMain().visualFlow(true);

@@ -3,6 +3,7 @@ package BluetoothNotify.Bluetooth;
 import BluetoothNotify.Main;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
@@ -16,8 +17,13 @@ public class DataConnection implements Runnable {
 	private Thread me;
 	private boolean stop;
 	private String connectionURL;
+	private DataConnectionEventListener listener;
+	private final Object mutex;
+	private InputStream in;
+	private OutputStream out;
 
 	public DataConnection(Main main) {
+		mutex = new Object();
 		this.main = main;
 		connectionURL = "";
 		reInit();
@@ -25,37 +31,81 @@ public class DataConnection implements Runnable {
 
 	private void reInit() {
 		stop = false;
+		me = null;
+		listener = null;
+		in = null;
+		out = null;
 	}
 
-	public void start() {
+	public void start(DataConnectionEventListener Listener) {
+		this.listener = Listener;
+		stop = false;
 		me = new Thread(this);
 		me.start();
+	}
+
+	public void stop(boolean Wait) {
+		stop = true;
+		if (me != null) {
+			try {
+				me.join();
+			} catch (InterruptedException ex) {
+			}
+		}
 	}
 
 	public void run() {
 
 		try {
 			StreamConnection connection = (StreamConnection) Connector.open(connectionURL);
-			InputStream in = connection.openInputStream();
+			in = connection.openInputStream();
+			out = connection.openOutputStream();
 
 			byte[] serialData;
 			while (!stop) {
-				int lengthavai = 0;
-				lengthavai = in.available();
+				synchronized (mutex) {
+					int lengthavai = 0;
+					lengthavai = in.available();
 
-				if (lengthavai > 0) {
-					serialData = new byte[lengthavai];
-					int length = in.read(serialData);
-					System.out.println("data read: " + new String(serialData));
-					//dataViewForm.append(new String(serialData));
+					if (lengthavai > 0) {
+						serialData = new byte[lengthavai];
+						int length = in.read(serialData);
+						if (listener != null) {
+							listener.DataConnectionRecievedData(length, serialData);
+						}
+					}
+				}
+				try {
+					Thread.sleep(1000 * 5);
+				} catch (InterruptedException ex) {
 				}
 			}
 
+			out.close();
 			in.close();
 			connection.close();
 
 		} catch (IOException ioe) {
-			main.getVisualMain().displayError("Error while communicating: "+ioe.getMessage());
+			main.getVisualMain().displayError("Error while communicating: " + ioe.getMessage());
+		}
+		reInit();
+	}
+
+	public void write(byte Data) throws IOException {
+		synchronized (mutex) {
+			out.write(Data);
+		}
+	}
+
+	public void write(byte[] Data) throws IOException {
+		synchronized (mutex) {
+			out.write(Data);
+		}
+	}
+
+	public void write(byte[] Data, int Offset, int Length) throws IOException {
+		synchronized (mutex) {
+			out.write(Data, Offset, Length);
 		}
 	}
 

@@ -41,6 +41,7 @@ public class Main extends MIDlet {
 	}
 
 	public void exitApp() {
+		dataConnection.stop(false);
 		destroyApp(true);
 	}
 
