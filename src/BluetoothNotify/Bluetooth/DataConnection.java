@@ -36,11 +36,6 @@ public class DataConnection implements Runnable {
 
 		try {
 			StreamConnection connection = (StreamConnection) Connector.open(connectionURL);
-
-			//
-			// open an input stream to get some data
-			//
-
 			InputStream in = connection.openInputStream();
 
 			byte[] serialData;
@@ -60,7 +55,7 @@ public class DataConnection implements Runnable {
 			connection.close();
 
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			main.getVisualMain().displayError("Error while communicating: "+ioe.getMessage());
 		}
 	}
 
