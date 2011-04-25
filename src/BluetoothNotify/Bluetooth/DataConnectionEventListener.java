@@ -6,5 +6,5 @@ package BluetoothNotify.Bluetooth;
  */
 public interface DataConnectionEventListener {
 
-	public void DataConnectionPacketRecieved(Packet packet);
+	public boolean DataConnectionPacketRecieved(Packet packet); //True=already handled
 }

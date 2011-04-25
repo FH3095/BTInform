@@ -160,7 +160,7 @@ public class AwaitMessage implements CommandListener, DataConnectionEventListene
 		}*/
 	}
 
-	public void DataConnectionPacketRecieved(Packet packet) {
+	public boolean DataConnectionPacketRecieved(Packet packet) {
 		StringBuffer LogContentBuffer = new StringBuffer(2148);
 		LogContentBuffer.append(getLog().getText()).append(packet.getType()).
 				append(";");
@@ -174,5 +174,6 @@ public class AwaitMessage implements CommandListener, DataConnectionEventListene
 			LogContent = LogContent.substring(LogContentBuffer.length() - 2048);
 		}
 		getLog().setText(LogContent);
+		return false;
 	}
 }
