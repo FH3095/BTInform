@@ -1,13 +1,14 @@
 package BluetoothNotify.Visual;
 
 import BluetoothNotify.Bluetooth.DataConnectionEventListener;
+import BluetoothNotify.Bluetooth.Packet;
 import BluetoothNotify.Main;
 import javax.microedition.lcdui.*;
 
 /**
  * @author FH
  */
-public class AwaitMessage implements CommandListener,DataConnectionEventListener {
+public class AwaitMessage implements CommandListener, DataConnectionEventListener {
 
 	private Main main;
 	//<editor-fold defaultstate="collapsed" desc=" Generated Fields ">//GEN-BEGIN:|fields|0|
@@ -46,12 +47,12 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 	 */
 	public Form getAwaitMessage() {
 		if (awaitMessage == null) {//GEN-END:|11-getter|0|11-preInit
-		// write pre-init user code here
+			// write pre-init user code here
 			awaitMessage = new Form("Await Message", new Item[] { getLog() });//GEN-BEGIN:|11-getter|1|11-postInit
 			awaitMessage.addCommand(getExitCommand());
 			awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
-		// write post-init user code here
-		initialize();
+			// write post-init user code here
+			initialize();
 		}//GEN-BEGIN:|11-getter|2|
 		return awaitMessage;
 	}
@@ -67,16 +68,15 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 		// write pre-action user code here
 		if (displayable == awaitMessage) {//GEN-BEGIN:|4-commandAction|1|15-preAction
 			if (command == exitCommand) {//GEN-END:|4-commandAction|1|15-preAction
-			// write pre-action user code here
-			main.getVisualMain().exitMIDlet();
+				// write pre-action user code here
+				main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|2|15-postAction
-			// write post-action user code here
+				// write post-action user code here
 			}//GEN-BEGIN:|4-commandAction|3|4-postCommandAction
 		}//GEN-END:|4-commandAction|3|4-postCommandAction
 		// write post-action user code here
 	}//GEN-BEGIN:|4-commandAction|4|19-postAction
 	//</editor-fold>//GEN-END:|4-commandAction|4|19-postAction
-
 
 	//<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|14-getter|0|14-preInit
 	/**
@@ -85,9 +85,9 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 	 */
 	public Command getExitCommand() {
 		if (exitCommand == null) {//GEN-END:|14-getter|0|14-preInit
-		// write pre-init user code here
+			// write pre-init user code here
 			exitCommand = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|14-getter|1|14-postInit
-		// write post-init user code here
+			// write post-init user code here
 		}//GEN-BEGIN:|14-getter|2|
 		return exitCommand;
 	}
@@ -118,9 +118,9 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 	 */
 	public Command getOkCommand() {
 		if (okCommand == null) {//GEN-END:|18-getter|0|18-preInit
-		// write pre-init user code here
+			// write pre-init user code here
 			okCommand = new Command("Ok", Command.OK, 0);//GEN-LINE:|18-getter|1|18-postInit
-		// write post-init user code here
+			// write post-init user code here
 		}//GEN-BEGIN:|18-getter|2|
 		return okCommand;
 	}
@@ -147,21 +147,36 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 
 	public void startDisplay() {
 		main.getDataConnection().start(this);
-		if(!main.getDataConnection().isWriteReady(15000))
-		{
+		if (!main.getDataConnection().isWriteReady(15000)) {
 			main.getVisualMain().displayError("Connection isn't write-ready!");
 			return;
 		}
 		/*String File="Duke (png)";
 		try {
-			main.getDataConnection().write((byte)File.length());
-			main.getDataConnection().write(File.getBytes());
+		main.getDataConnection().write((byte)File.length());
+		main.getDataConnection().write(File.getBytes());
 		} catch (IOException ex) {
-			main.getVisualMain().displayError("Error while writing to connection: "+ex.getMessage());
+		main.getVisualMain().displayError("Error while writing to connection: "+ex.getMessage());
 		}*/
 	}
 
 	public void DataConnectionRecievedData(int Length, byte[] Data) {
-		getLog().setText(getLog().getText()+"\n"+new String(Data));
+		getLog().setText(getLog().getText() + "\n" + new String(Data));
+	}
+
+	public void DataConnectionPacketRecieved(Packet packet) {
+		StringBuffer LogContentBuffer = new StringBuffer(2148);
+		LogContentBuffer.append(getLog().getText()).append(packet.getType()).
+				append(";");
+		byte[] binData = packet.getBinData();
+		for (short i = 0; i < binData.length; ++i) {
+			LogContentBuffer.append((int) binData[i]);
+		}
+		LogContentBuffer.append(packet.getStrData()).append("\n");
+		String LogContent=LogContentBuffer.toString();
+		if (LogContent.length() > 2048) {
+			LogContent = LogContent.substring(LogContentBuffer.length() - 2048);
+		}
+		getLog().setText(LogContent);
 	}
 }
