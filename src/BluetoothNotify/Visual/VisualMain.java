@@ -98,6 +98,6 @@ public class VisualMain {
 	}
 
 	public void destroyMIDlet() {
-		switchDisplayable(null, null);
+		getDisplay().setCurrent(null);
 	}
 }

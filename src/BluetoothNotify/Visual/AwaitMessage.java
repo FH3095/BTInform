@@ -49,7 +49,6 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 		// write pre-init user code here
 			awaitMessage = new Form("Await Message", new Item[] { getLog() });//GEN-BEGIN:|11-getter|1|11-postInit
 			awaitMessage.addCommand(getExitCommand());
-			awaitMessage.addCommand(getOkCommand());
 			awaitMessage.setCommandListener(this);//GEN-END:|11-getter|1|11-postInit
 		// write post-init user code here
 		initialize();
@@ -72,16 +71,12 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 			main.getVisualMain().exitMIDlet();
 //GEN-LINE:|4-commandAction|2|15-postAction
 			// write post-action user code here
-			} else if (command == okCommand) {//GEN-LINE:|4-commandAction|3|19-preAction
-			// write pre-action user code here
-			main.getVisualMain().visualFlow(true);
-//GEN-LINE:|4-commandAction|4|19-postAction
-			// write post-action user code here
-			}//GEN-BEGIN:|4-commandAction|5|4-postCommandAction
-		}//GEN-END:|4-commandAction|5|4-postCommandAction
+			}//GEN-BEGIN:|4-commandAction|3|4-postCommandAction
+		}//GEN-END:|4-commandAction|3|4-postCommandAction
 		// write post-action user code here
-	}//GEN-BEGIN:|4-commandAction|6|
-	//</editor-fold>//GEN-END:|4-commandAction|6|
+	}//GEN-BEGIN:|4-commandAction|4|19-postAction
+	//</editor-fold>//GEN-END:|4-commandAction|4|19-postAction
+
 
 	//<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|14-getter|0|14-preInit
 	/**
@@ -152,6 +147,18 @@ public class AwaitMessage implements CommandListener,DataConnectionEventListener
 
 	public void startDisplay() {
 		main.getDataConnection().start(this);
+		if(!main.getDataConnection().isWriteReady(15000))
+		{
+			main.getVisualMain().displayError("Connection isn't write-ready!");
+			return;
+		}
+		/*String File="Duke (png)";
+		try {
+			main.getDataConnection().write((byte)File.length());
+			main.getDataConnection().write(File.getBytes());
+		} catch (IOException ex) {
+			main.getVisualMain().displayError("Error while writing to connection: "+ex.getMessage());
+		}*/
 	}
 
 	public void DataConnectionRecievedData(int Length, byte[] Data) {

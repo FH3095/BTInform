@@ -55,7 +55,6 @@ public class DataConnection implements Runnable {
 	}
 
 	public void run() {
-
 		try {
 			StreamConnection connection = (StreamConnection) Connector.open(connectionURL);
 			in = connection.openInputStream();
@@ -115,5 +114,19 @@ public class DataConnection implements Runnable {
 
 	public void setConnectionURL(String ConnectionURL) {
 		this.connectionURL = ConnectionURL;
+	}
+
+	public boolean isWriteReady(int WaitTime) {
+		if (WaitTime < 0) {
+			WaitTime = 0;
+		}
+		while (WaitTime > 0 && out == null) {
+			try {
+				Thread.sleep(1000 * 1);
+			} catch (InterruptedException ex) {
+			}
+			WaitTime -= 1000;
+		}
+		return out != null;
 	}
 }
