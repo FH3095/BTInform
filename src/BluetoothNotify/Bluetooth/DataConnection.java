@@ -4,8 +4,6 @@ import BluetoothNotify.Main;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 
@@ -23,7 +21,6 @@ public class DataConnection implements Runnable {
 	private final Object mutex;
 	private DataInputStream in;
 	private DataOutputStream out;
-	private Packet curPacket;
 
 	public DataConnection(Main main) {
 		mutex = new Object();
@@ -38,7 +35,6 @@ public class DataConnection implements Runnable {
 		listener = null;
 		in = null;
 		out = null;
-		curPacket=null;
 	}
 
 	public void start(DataConnectionEventListener Listener) {
@@ -64,17 +60,16 @@ public class DataConnection implements Runnable {
 			in = connection.openDataInputStream();
 			out = connection.openDataOutputStream();
 
-			byte[] serialData;
 			while (!stop) {
 				synchronized (mutex) {
 					int lengthavai = 0;
 					lengthavai = in.available();
 
-					if (lengthavai > 0) {
-						serialData = new byte[lengthavai];
-						int length = in.read(serialData);
+					if (lengthavai >= Packet.HEADER_SIZE) {
+						Packet curPacket = new Packet();
+						curPacket.readFromStream(in);
 						if (listener != null) {
-							listener.DataConnectionRecievedData(length, serialData);
+							listener.DataConnectionPacketRecieved(curPacket);
 						}
 					}
 				}
@@ -93,13 +88,12 @@ public class DataConnection implements Runnable {
 		}
 		reInit();
 	}
-	
-	public void write(Packet packet)
-	{
+
+	public void write(Packet packet) {
 		try {
 			packet.writeToStream(out);
 		} catch (IOException ex) {
-			main.getVisualMain().displayError("Can't send packet: "+ex.getMessage());
+			main.getVisualMain().displayError("Can't send packet: " + ex.getMessage());
 		}
 	}
 

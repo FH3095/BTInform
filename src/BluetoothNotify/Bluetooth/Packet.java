@@ -8,7 +8,7 @@ import java.io.IOException;
  *
  * @author FH
  */
-public abstract class Packet {
+public class Packet {
 
 	public class PacketTypes {
 
